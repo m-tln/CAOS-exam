@@ -26,4 +26,7 @@ int main(int argc, char* argv[]) {
         const char* err = "Error in reading";
         write(2, err, strlen(err));
     }
+
+    close(st_fd);
+    close(nd_fd);
 }
