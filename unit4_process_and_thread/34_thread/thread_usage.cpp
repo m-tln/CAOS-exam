@@ -1,7 +1,7 @@
 #include <thread>
 #include <iostream>
 void job(char c = 'a') {
-    for (int i = 0; i < 100000; ++i) {
+    for (int i = 0; i < 10; ++i) {
         std::cout << c;
     }
 }
