@@ -8,6 +8,6 @@ int main() {
     if (result) {
         std::cout << number << " is a prime number" << std::endl;
     } else {
-        std::cout << " is not a prime number" << std::endl;
+        std::cout << number << " is not a prime number" << std::endl;
     }
 }
