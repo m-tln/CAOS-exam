@@ -6,15 +6,15 @@ class Thread {
 using Callable = void(*)();
 public:
 Thread(Callable func): func(func) {
-    // stack = mmap(
-    //              NULL, STACK_SIZE, PROT_READ|PROT_WRITE,
-    //              MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK,
-    //              -1, 0);
-    // pid = clone(
-    //             threadRoutine, stack,
-    //             CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|
-    //             CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|
-    //             CLONE_CHILD_CLEARTID, (void*)func);
+    stack = mmap(
+                 NULL, STACK_SIZE, PROT_READ|PROT_WRITE,
+                 MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK,
+                 -1, 0);
+    pid = clone(
+                threadRoutine, stack + STACK_SIZE,
+                CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|
+                CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|
+                CLONE_CHILD_CLEARTID, (void*)func);
 }
 void join() {
     int status;
