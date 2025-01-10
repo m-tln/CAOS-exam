@@ -9,21 +9,21 @@ class Thread {
     using Callable = void(*)();
 public:
     Thread(Callable func) : func(func), stack(nullptr), pid(-1) {
-        stack = mmap(nullptr, STACK_SIZE, PROT_READ | PROT_WRITE,
-                     MAP_PRIVATE | MAP_ANONYMOUS | MAP_STACK, -1, 0);
-        if (stack == MAP_FAILED) {
-            perror("mmap");
-            throw std::runtime_error("Failed to allocate stack memory");
-        }
+        // stack = mmap(nullptr, STACK_SIZE, PROT_READ | PROT_WRITE,
+        //              MAP_PRIVATE | MAP_ANONYMOUS | MAP_STACK, -1, 0);
+        // if (stack == MAP_FAILED) {
+        //     perror("mmap");
+        //     throw std::runtime_error("Failed to allocate stack memory");
+        // }
 
-        pid = clone(threadRoutine, static_cast<char*>(stack) + STACK_SIZE,
-                    CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND |
-                    CLONE_SYSVSEM | SIGCHLD, reinterpret_cast<void*>(func));
-        if (pid == -1) {
-            perror("clone");
-            munmap(stack, STACK_SIZE);
-            throw std::runtime_error("Failed to create thread");
-        }
+        // pid = clone(threadRoutine, static_cast<char*>(stack) + STACK_SIZE,
+        //             CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND |
+        //             CLONE_SYSVSEM | SIGCHLD, reinterpret_cast<void*>(func));
+        // if (pid == -1) {
+        //     perror("clone");
+        //     munmap(stack, STACK_SIZE);
+        //     throw std::runtime_error("Failed to create thread");
+        // }
     }
 
     void join() {
